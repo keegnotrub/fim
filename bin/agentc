@@ -10,7 +10,7 @@ case "${CURSOR}" in
         echo "usage: agentc <cursor>"
         echo "\nUse cursor to provide the position for completion within text."
         echo "\nText should be piped to the agent for completion."
-        echo "   $ cat file.txt | agentc 732"
+        echo "   $ cat app/models/user.rb | agentc 732"
         exit 0
         ;;
     *[!0-9]*)

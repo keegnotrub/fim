@@ -27,7 +27,7 @@ case "${SKILL}" in
         echo "   explain   Explain code"
         echo "   improve   Improve code"
         echo "\nText should be piped to the agent for context."
-        echo "   $ cat app/models/user.rb | agent rails check"
+        echo "   $ cat app/models/user.rb | agent rails improve"
         exit 0
         ;;
     *)

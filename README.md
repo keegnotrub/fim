@@ -11,7 +11,14 @@ After running the requirements, use the `Makefile`
     $ sudo make install
 
 ## Requirements
+
+Login to Mistral's [La Plateforme](https://console.mistral.ai/codestral) and setup an API key from the "Codestral" page.
+
+    $ open https://console.mistral.ai/codestral
+    $ echo 'export CODESTRAL_API_KEY="your_api_key"' >> $HOME/.zprofile
     
+Install the needed binaries in your package manager of choice.
+
     # Macports
     $ sudo port install jq
 
@@ -34,7 +41,7 @@ After running the requirements, use the `Makefile`
     improve   Improve code
 
     Text should be piped to the agent for context.
-    $ cat app/models/user.rb | agent rails check
+    $ cat app/models/user.rb | agent rails improve
 
 ## Usage `agentc`
     
@@ -43,4 +50,4 @@ After running the requirements, use the `Makefile`
     Use cursor to provide the position for completion within text.
 
     Text should be piped to the agent for completion.
-    $ cat file.txt | agentc 732
+    $ cat app/models/user.rb | agentc 732
