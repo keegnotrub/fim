@@ -1,0 +1,42 @@
+#!/usr/bin/env zsh
+
+# Usage: agentc --help
+# Requires: read, cat, curl, jq
+
+CURSOR="${1}"
+
+case "${CURSOR}" in
+    "" | "-h" | "--help")
+        echo "usage: agentc <cursor>"
+        echo "\nUse cursor to provide the position for completion within text."
+        echo "\nText should be piped to the agent for completion."
+        echo "   $ cat file.txt | agentc 732"
+        exit 0
+        ;;
+    *[!0-9]*)
+        echo "agent: '${CURSOR}' is not an agentc cursor. See 'agentc --help'."
+        exit 2
+        ;;
+esac
+
+if [[ -p /dev/stdin ]]; then
+    read -u 0 -k $CURSOR PROMPT
+    SUFFIX=$(cat)
+else
+    echo "agentc: 'requires text piped for completion. See 'agentc --help'."
+    exit 2
+fi
+
+curl -s -N \
+  --location 'https://codestral.mistral.ai/v1/fim/completions' \
+  --header 'Content-Type: application/json' \
+  --header 'Accept: application/json' \
+  --header "Authorization: Bearer $CODESTRAL_API_KEY" \
+  --data "{
+  \"model\": \"codestral-latest\",
+  \"stream\": true,
+  \"prompt\": $(printf %s ${PROMPT} | jq -Rs '.'),
+  \"suffix\": $(printf %s ${SUFFIX} | jq -Rs '.'),
+  \"stop\": [\"\\n\\n\"]
+}" | jq --stream -Rrj \
+        'match("data: (.*)")|.captures[0].string|select(test("DONE")|not)|fromjson|.choices[0].delta.content'
