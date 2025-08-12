@@ -1,4 +1,4 @@
-NAME=agent
+NAME=fim
 VERSION=0.0.1
 AUTHOR=keegnotrub
 URL=https://github.com/$(AUTHOR)/$(NAME)

@@ -1,20 +1,20 @@
 #!/usr/bin/env zsh
 
-# Usage: agentc --help
+# Usage: fim --help
 # Requires: read, cat, curl, jq
 
 CURSOR="${1}"
 
 case "${CURSOR}" in
     "" | "-h" | "--help")
-        echo "usage: agentc <cursor>"
+        echo "usage: fim <cursor>"
         echo "\nUse cursor to provide the position for completion within text."
-        echo "\nText should be piped to the agent for completion."
-        echo "   $ cat app/models/user.rb | agentc 732"
+        echo "\nText should be piped to fim for completion."
+        echo "   $ cat app/models/user.rb | fim 732"
         exit 0
         ;;
     *[!0-9]*)
-        echo "agent: '${CURSOR}' is not an agentc cursor. See 'agentc --help'."
+        echo "fim: '${CURSOR}' is not a fim cursor. See 'fim --help'."
         exit 2
         ;;
 esac
@@ -23,7 +23,7 @@ if [[ -p /dev/stdin ]]; then
     read -u 0 -k $CURSOR PROMPT
     SUFFIX=$(cat)
 else
-    echo "agentc: 'requires text piped for completion. See 'agentc --help'."
+    echo "fim: 'requires text piped for completion. See 'fim --help'."
     exit 2
 fi
 

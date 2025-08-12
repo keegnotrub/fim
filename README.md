@@ -1,13 +1,13 @@
-# agent
+# fim
 
-Agent is a set of zshell scripts (`agent` and `agentc`) for interfacing with Mistral's [Codestral](https://mistral.ai/news/codestral-2501).
+fim is a zshell script (`fim`) for interfacing with Mistral's [Codestral](https://mistral.ai/news/codestral-2501) for FIM completion.
 
 ## Installation
 
 After running the requirements, use the `Makefile`
 
-    $ git clone https://github.com/keegnotrub/agent
-    $ cd agent
+    $ git clone https://github.com/keegnotrub/fim
+    $ cd fim
     $ sudo make install
 
 ## Requirements
@@ -25,29 +25,11 @@ Install the needed binaries in your package manager of choice.
     # Homebrew
     $ brew install jq
 
-## Usage `agent`
-
-    $ agent <skill> <command>
+## Usage `fim`
     
-    These are the available agent skills:
-    rails     Ruby on Rails
-    react     React
-    web       Web
-
-    These are the agent commands used in various situations:
-    ask       Ask anything
-    debug     Debug an error
-    explain   Explain code
-    improve   Improve code
-
-    Text should be piped to the agent for context.
-    $ cat app/models/user.rb | agent rails improve
-
-## Usage `agentc`
-    
-    $ agentc <cursor>
+    $ fim <cursor>
 
     Use cursor to provide the position for completion within text.
 
-    Text should be piped to the agent for completion.
-    $ cat app/models/user.rb | agentc 732
+    Text should be piped to fim for completion.
+    $ cat app/models/user.rb | fim 732
